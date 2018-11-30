@@ -3,10 +3,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Support Hog 1.0</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h:form style="text-align: center" >
+            <h:graphicImage value="resources/img/supportHogLogo.png" width="350px"/>
+            <br/>
+            <label>Menu</label>
+            <br/>
+            <hr/>
+            <h:commandButton action="add" value="Add new case" />
+            <br/>
+            <hr/>
+            <h:commandButton action="viewActive" value="View active cases" />
+            <br/>
+            <hr/>
+            <h:commandButton action="viewInactive" value="View inactive cases" />
+            <br/>
+            <hr/>
+            <h:commandButton action="view" value="View all cases" />
+            <br/>
+            <hr/>
+            <h:commandButton action="viewMonth" value="View month" />
+            <br/>
+            <hr/>
+            <h:commandButton action="remove" value="Remove case" />
+            
+        </h:form>
     </h:body>
 </html>
 
