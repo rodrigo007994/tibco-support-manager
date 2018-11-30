@@ -45,8 +45,12 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>
-                            <label>Date - </label>
-                            <h:inputText value="#{caso.date}" label="Date"/>
+                            <label>Create Date - </label>
+                            <h:inputText id="date" value="#{caso.createDate}" 
+                                required="true"
+                                label="Create_Date" >
+                                <f:convertDateTime pattern="d-M-yyyy" />
+                              </h:inputText>
                         </td>
                     </tr>
                     <tr>
@@ -57,10 +61,20 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td>
-                            <label>Status - </label>
-                            <h:selectOneMenu label="Status" value="#{caso.status}" >
-                                <f:selectItem itemValue="ACTIVE"/>
-                                <f:selectItem itemValue="INACTIVE"/>
+                            <label>Active - </label>
+                            <h:selectOneMenu label="Active" value="#{caso.active}" >
+                                <f:selectItem itemValue="true"/>
+                                <f:selectItem itemValue="false"/>
+                            </h:selectOneMenu>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Open - </label>
+                            <h:selectOneMenu label="Open" value="#{caso.open}" >
+                                <f:selectItem itemValue="true"/>
+                                <f:selectItem itemValue="false"/>
                             </h:selectOneMenu>
 
                         </td>

@@ -6,7 +6,6 @@
 package com.tibco.support.manager;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -20,18 +19,22 @@ import javax.faces.bean.RequestScoped;
 public class Caso implements Serializable{
 
     public Caso() {
-        setDate(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
-        setDueDate(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
+        //setDate(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
+        //setDueDate(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
     }
     
     
     
     private int id;
+    private String owner;
     private String client;
     private String notes;
-    private String date;
-    private String dueDate;
-    private String status;
+    private Date createDate;
+    private Date dueDate;
+    private Date updatedDate;
+    private Date closeDate;
+    private boolean active;
+    private boolean open;
 
     public int getId() {
         return id;
@@ -39,6 +42,14 @@ public class Caso implements Serializable{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public String getClient() {
@@ -57,29 +68,55 @@ public class Caso implements Serializable{
         this.notes = notes;
     }
 
-    public String getDate() {
-        return date;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
-    public String getStatus() {
-        return status;
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public Date getCloseDate() {
+        return closeDate;
+    }
+
+    public void setCloseDate(Date closeDate) {
+        this.closeDate = closeDate;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
     }
     
+    
+   
     
 }

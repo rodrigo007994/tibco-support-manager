@@ -43,22 +43,6 @@ public class supportManager {
     }
     
     public String saveCaso(){
-        if (isValidDate(this.getCaso().getDate())==false){
-            String msg="La fecha esta mal formada";
-            FacesMessage facesMessage=new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,msg);
-            this.getCaso().setDate(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
-            FacesContext facesContext=FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, facesMessage);
-            return "add";
-        }
-        if (isValidDate(this.getCaso().getDueDate())==false){
-            String msg="La fecha esta mal formada";
-            FacesMessage facesMessage=new FacesMessage(FacesMessage.SEVERITY_ERROR,msg,msg);
-            this.getCaso().setDueDate(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
-            FacesContext facesContext=FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, facesMessage);
-            return "add";
-        }
         try {
             Writer.writeToFile("casos.db",this.getCaso());
             return "viewActive";
@@ -76,36 +60,8 @@ public class supportManager {
     public void setCaso(Caso caso) {
         this.caso = caso;
     }
-    private static boolean isValidDate(String inDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        dateFormat.setLenient(false);
-        try {
-            dateFormat.parse(inDate.trim());
-        } catch (ParseException pe) {
-            return false;
-        }
-        return true;
-    }
     public static Caso[] getCasos(){
         Casos casos=Reader.readFromFile();
-        Caso[] out=new Caso[casos.size()];
-        
-        if(!casos.isEmpty()) {
-            for(int c=0;c<casos.size();c++){
-                out[c]=casos.get(c);
-            }
-        }
-        return out;
-    }
-    public static Caso[] getMesCasos(){
-        Casos casos=Reader.readFromFile();
-        for (int c = 0; c < casos.size(); c++) {
-            
-            if(!casos.get(c).getDate().substring(3).equals(new SimpleDateFormat("MM-yyyy").format(new Date()))){
-                casos.remove(c);
-                c--;
-            }
-        }
         Caso[] out=new Caso[casos.size()];
         
         if(!casos.isEmpty()) {
@@ -119,7 +75,7 @@ public class supportManager {
         Casos casos=Reader.readFromFile();
         for (int c = 0; c < casos.size(); c++) {
             
-            if(!casos.get(c).getStatus().equals("ACTIVE")){
+            if(!casos.get(c).isActive()){
                 casos.remove(c);
                 c--;
             }
@@ -137,7 +93,7 @@ public class supportManager {
         Casos casos=Reader.readFromFile();
         for (int c = 0; c < casos.size(); c++) {
             
-            if(!casos.get(c).getStatus().equals("INACTIVE")){
+            if(casos.get(c).isActive()){
                 casos.remove(c);
                 c--;
             }
@@ -152,12 +108,12 @@ public class supportManager {
         return out;
     }
     
-    public String setStatus(int changeid, String status, String streturn){
+    public String setCaseActive(int id, boolean active, String streturn){
         String fileName="casos.db";
         Casos casos= Reader.readFromFile();
         for(Caso caso : casos){
-            if(caso.getId()==changeid){
-                caso.setStatus(status);
+            if(caso.getId()==id){
+                caso.setActive(active);
                 break;
             }
         }
